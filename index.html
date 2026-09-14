@@ -1,0 +1,4031 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Refugio Interior Pro - Mind & Soul Tool</title>
+
+<style>
+:root{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --soft:#f1f5f9;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --muted:#64748b;
+  --indigo:#4f46e5;
+  --indigo-dark:#3730a3;
+  --indigo-soft:#eef2ff;
+  --emerald:#059669;
+  --emerald-soft:#ecfdf5;
+  --shadow:0 8px 25px rgba(15,23,42,.07);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.55;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* =========================
+   ACCESS SCREEN
+========================= */
+
+#accessScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at top left,#eef2ff 0,transparent 35%),
+    radial-gradient(circle at bottom right,#ecfdf5 0,transparent 35%),
+    var(--bg);
+}
+
+.access-card{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px 24px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.access-icon{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  margin:0 auto 18px;
+  background:var(--indigo-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.access-card h1{
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+.access-card p{
+  color:var(--muted);
+  margin:0 0 22px;
+}
+
+.access-input{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  outline:none;
+  text-align:center;
+  letter-spacing:1.5px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.access-input:focus{
+  border-color:var(--indigo);
+  box-shadow:0 0 0 3px rgba(79,70,229,.1);
+}
+
+.access-button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px 18px;
+  background:var(--indigo);
+  color:white;
+  font-weight:700;
+}
+
+.access-button:hover{
+  background:var(--indigo-dark);
+}
+
+.access-error{
+  color:#b45309;
+  background:#fffbeb;
+  border:1px solid #fde68a;
+  padding:11px 13px;
+  border-radius:12px;
+  margin-top:12px;
+  font-size:14px;
+}
+
+.access-note{
+  margin-top:18px !important;
+  font-size:12px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  padding:22px 16px 18px;
+}
+
+.header-inner{
+  max-width:1000px;
+  margin:auto;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:27px;
+  letter-spacing:-.5px;
+}
+
+.brand p{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.language-switch{
+  display:flex;
+  gap:5px;
+  background:var(--soft);
+  padding:4px;
+  border-radius:12px;
+  flex-shrink:0;
+}
+
+.language-switch button{
+  border:0;
+  background:transparent;
+  padding:7px 10px;
+  border-radius:9px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+
+.language-switch button.active{
+  background:white;
+  color:var(--indigo);
+  box-shadow:0 2px 7px rgba(15,23,42,.08);
+}
+
+.notice{
+  margin-top:16px;
+  padding:12px 14px;
+  background:var(--indigo-soft);
+  color:#3730a3;
+  border-radius:13px;
+  font-size:13px;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.tabs-wrap{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(248,250,252,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;
+}
+
+.tabs{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  gap:7px;
+  padding:9px 12px;
+  min-width:max-content;
+}
+
+.tab{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  padding:9px 12px;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.tab.active{
+  background:white;
+  color:var(--indigo);
+  border-color:var(--border);
+  box-shadow:0 2px 8px rgba(15,23,42,.05);
+}
+
+/* =========================
+   APP
+========================= */
+
+main{
+  max-width:1000px;
+  margin:0 auto;
+  padding:22px 15px 50px;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  margin:0 0 7px;
+  font-size:21px;
+}
+
+.card h3{
+  margin:0 0 7px;
+  font-size:17px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin:0 0 17px;
+}
+
+.area-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.area-button{
+  text-align:left;
+  border:1px solid var(--border);
+  background:white;
+  padding:14px;
+  border-radius:15px;
+  transition:.2s;
+}
+
+.area-button:hover{
+  border-color:#c7d2fe;
+  background:var(--indigo-soft);
+}
+
+.area-button.selected{
+  border-color:var(--indigo);
+  background:var(--indigo-soft);
+}
+
+.area-icon{
+  font-size:22px;
+  display:block;
+  margin-bottom:4px;
+}
+
+.area-title{
+  font-weight:700;
+}
+
+.area-description{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.pattern-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.pattern{
+  border:1px solid var(--border);
+  background:white;
+  border-radius:13px;
+  padding:11px 12px;
+  text-align:left;
+  color:var(--text);
+}
+
+.pattern.selected{
+  border-color:var(--indigo);
+  background:var(--indigo-soft);
+}
+
+textarea,
+input[type="text"],
+input[type="number"]{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:12px 13px;
+  outline:none;
+  background:white;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+textarea:focus,
+input:focus{
+  border-color:var(--indigo);
+  box-shadow:0 0 0 3px rgba(79,70,229,.08);
+}
+
+.primary-button{
+  border:0;
+  background:var(--indigo);
+  color:white;
+  border-radius:13px;
+  padding:12px 17px;
+  font-weight:700;
+}
+
+.primary-button:hover{
+  background:var(--indigo-dark);
+}
+
+.secondary-button{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--text);
+  border-radius:13px;
+  padding:11px 15px;
+  font-weight:600;
+}
+
+.button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px;
+}
+
+.result-box{
+  background:var(--soft);
+  border-radius:15px;
+  padding:16px;
+  margin-top:15px;
+}
+
+.result-box h3{
+  margin-bottom:5px;
+}
+
+.result-box p{
+  margin:6px 0;
+}
+
+.recommendation{
+  margin-top:12px;
+  padding:13px;
+  background:var(--indigo-soft);
+  border-radius:13px;
+  color:#312e81;
+}
+
+label{
+  display:block;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+.field{
+  margin-top:15px;
+}
+
+/* =========================
+   CALM SCALE
+========================= */
+
+.scale-row{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.scale-button{
+  width:40px;
+  height:40px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:white;
+  font-weight:700;
+}
+
+.scale-button.selected{
+  background:var(--indigo);
+  color:white;
+  border-color:var(--indigo);
+}
+
+.scale-caption{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* =========================
+   BREATHING
+========================= */
+
+.calm-container{
+  text-align:center;
+}
+
+.breathing-stage{
+  min-height:400px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.breath-circle{
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  background:var(--indigo-soft);
+  border:5px solid rgba(79,70,229,.18);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:
+    width 4s ease-in-out,
+    height 4s ease-in-out,
+    transform 4s ease-in-out,
+    box-shadow 4s ease-in-out;
+  box-shadow:0 0 0 18px rgba(79,70,229,.035);
+}
+
+.breath-circle.prep{
+  width:210px;
+  height:210px;
+}
+
+.breath-circle.inhale{
+  width:285px;
+  height:285px;
+  box-shadow:
+    0 0 0 25px rgba(79,70,229,.04),
+    0 0 45px rgba(79,70,229,.09);
+}
+
+.breath-circle.hold{
+  width:285px;
+  height:285px;
+  transition-duration:0s;
+}
+
+.breath-circle.exhale{
+  width:190px;
+  height:190px;
+  box-shadow:0 0 0 18px rgba(79,70,229,.025);
+}
+
+.breath-number{
+  font-size:43px;
+  font-weight:700;
+  line-height:1;
+}
+
+.breath-phase{
+  margin-top:8px;
+  font-weight:700;
+  color:var(--indigo-dark);
+}
+
+.breath-message{
+  max-width:420px;
+  min-height:55px;
+  margin:25px auto 0;
+  color:var(--muted);
+  font-size:15px;
+}
+
+.voice-status{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.calm-start{
+  margin-top:15px;
+  background:var(--indigo);
+  color:white;
+  border:0;
+  padding:15px 20px;
+  border-radius:15px;
+  font-weight:700;
+  box-shadow:0 6px 16px rgba(79,70,229,.18);
+}
+
+.calm-start:hover{
+  background:var(--indigo-dark);
+}
+
+/* =========================
+   PROMISES
+========================= */
+
+.promise{
+  padding:15px;
+  background:var(--emerald-soft);
+  border:1px solid #d1fae5;
+  border-radius:15px;
+  margin-bottom:10px;
+}
+
+.promise-ref{
+  font-size:12px;
+  color:var(--emerald);
+  font-weight:700;
+  margin-top:7px;
+}
+
+/* =========================
+   EVIDENCE
+========================= */
+
+.evidence-item{
+  background:var(--soft);
+  border-radius:14px;
+  padding:13px;
+  margin-top:10px;
+}
+
+.evidence-item strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+.delete-small{
+  border:0;
+  background:white;
+  color:var(--muted);
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:12px;
+  margin-top:7px;
+}
+
+/* =========================
+   LOAD
+========================= */
+
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.check-option{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:12px;
+  background:white;
+}
+
+.check-option input{
+  margin-right:7px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.disclaimer{
+  max-width:1000px;
+  margin:0 auto 40px;
+  padding:0 15px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:650px){
+
+  .header-top{
+    align-items:center;
+  }
+
+  .brand h1{
+    font-size:22px;
+  }
+
+  .area-grid,
+  .pattern-grid,
+  .check-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:17px;
+    border-radius:17px;
+  }
+
+  .breathing-stage{
+    min-height:370px;
+  }
+
+  .breath-circle.inhale,
+  .breath-circle.hold{
+    width:255px;
+    height:255px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     ACCESS SCREEN
+===================================================== -->
+
+<div id="accessScreen">
+
+  <div class="access-card">
+
+    <div class="access-icon">🌿</div>
+
+    <h1 id="accessTitle">Refugio Interior</h1>
+
+    <p id="accessDescription">
+      Esta versión está disponible para participantes de prueba.
+    </p>
+
+    <input
+      id="testerCode"
+      class="access-input"
+      type="text"
+      autocomplete="off"
+      autocapitalize="characters"
+      placeholder="Código de prueba"
+    >
+
+    <button
+      id="accessButton"
+      class="access-button"
+      onclick="checkTesterAccess()">
+      Entrar
+    </button>
+
+    <div id="accessError" class="access-error hidden"></div>
+
+    <p id="accessNote" class="access-note">
+      Tu código es individual y está destinado únicamente a tu prueba.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN APP
+===================================================== -->
+
+<div id="app" class="hidden">
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="header-top">
+
+      <div class="brand">
+
+        <h1>🌿 Refugio Interior</h1>
+
+        <p id="subtitle">
+          Mind & Soul Tool
+        </p>
+
+      </div>
+
+      <div class="language-switch">
+
+        <button
+          id="langES"
+          onclick="setLanguage('es')">
+          ES
+        </button>
+
+        <button
+          id="langEN"
+          onclick="setLanguage('en')">
+          EN
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="notice"
+      id="notice">
+      Una herramienta de reflexión y regulación emocional.
+      No es diagnóstico ni tratamiento.
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     TABS
+===================================================== -->
+
+<div class="tabs-wrap">
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      data-section="mind"
+      onclick="showSection('mind',this)"
+      id="tabMind">
+      🧠 Desglose Mente
+    </button>
+
+    <button
+      class="tab"
+      data-section="truth"
+      onclick="showSection('truth',this)"
+      id="tabTruth">
+      🔎 Filtro de Verdad
+    </button>
+
+    <button
+      class="tab"
+      data-section="calm"
+      onclick="showSection('calm',this)"
+      id="tabCalm">
+      🌿 Pausa de Calma
+    </button>
+
+    <button
+      class="tab"
+      data-section="promises"
+      onclick="showSection('promises',this)"
+      id="tabPromises">
+      📖 Promesas
+    </button>
+
+    <button
+      class="tab"
+      data-section="evidence"
+      onclick="showSection('evidence',this)"
+      id="tabEvidence">
+      📝 Evidencia
+    </button>
+
+    <button
+      class="tab"
+      data-section="load"
+      onclick="showSection('load',this)"
+      id="tabLoad">
+      ⚖️ Carga física/mental
+    </button>
+
+  </div>
+
+</div>
+
+
+<main>
+
+<!-- =====================================================
+     MIND BREAKDOWN
+===================================================== -->
+
+<section id="mind" class="section active">
+
+  <div class="card">
+
+    <h2 id="mindTitle">
+      🧠 Desglose Mente
+    </h2>
+
+    <p class="subtitle" id="mindSubtitle">
+      Identifica qué tipo de pensamiento está apareciendo.
+      No necesitas encontrar la explicación perfecta.
+    </p>
+
+    <div class="area-grid">
+
+      <button class="area-button" data-area="spiritual"
+        onclick="selectArea('spiritual',this)">
+
+        <span class="area-icon">🙏</span>
+
+        <div class="area-title" id="areaSpiritual">
+          Espiritual
+        </div>
+
+        <div class="area-description" id="areaSpiritualDesc">
+          Fe, culpa, duda, relación con Dios
+        </div>
+
+      </button>
+
+
+      <button class="area-button" data-area="health"
+        onclick="selectArea('health',this)">
+
+        <span class="area-icon">❤️</span>
+
+        <div class="area-title" id="areaHealth">
+          Salud
+        </div>
+
+        <div class="area-description" id="areaHealthDesc">
+          Síntomas, enfermedades, cuerpo
+        </div>
+
+      </button>
+
+
+      <button class="area-button" data-area="relationships"
+        onclick="selectArea('relationships',this)">
+
+        <span class="area-icon">🤝</span>
+
+        <div class="area-title" id="areaRelationships">
+          Relaciones
+        </div>
+
+        <div class="area-description" id="areaRelationshipsDesc">
+          Pareja, familia, rechazo, abandono
+        </div>
+
+      </button>
+
+
+      <button class="area-button" data-area="future"
+        onclick="selectArea('future',this)">
+
+        <span class="area-icon">🔮</span>
+
+        <div class="area-title" id="areaFuture">
+          Futuro
+        </div>
+
+        <div class="area-description" id="areaFutureDesc">
+          Incertidumbre, escenarios, catástrofes
+        </div>
+
+      </button>
+
+
+      <button class="area-button" data-area="work"
+        onclick="selectArea('work',this)">
+
+        <span class="area-icon">💼</span>
+
+        <div class="area-title" id="areaWork">
+          Trabajo / desempeño
+        </div>
+
+        <div class="area-description" id="areaWorkDesc">
+          Perfeccionismo, errores, responsabilidad
+        </div>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card hidden" id="patternsCard">
+
+    <h3 id="patternsTitle">
+      ¿Cuál de estos pensamientos se parece más al tuyo?
+    </h3>
+
+    <p class="subtitle" id="patternsSubtitle">
+      Puedes seleccionar más de uno.
+    </p>
+
+    <div
+      id="patterns"
+      class="pattern-grid">
+    </div>
+
+    <div class="field">
+
+      <label id="otherThoughtLabel">
+        También puedes escribirlo con tus propias palabras
+      </label>
+
+      <textarea
+        id="thoughtText"
+        placeholder="Escribe aquí si quieres..."
+      ></textarea>
+
+    </div>
+
+    <div class="button-row">
+
+      <button
+        class="primary-button"
+        onclick="analyzeThought()"
+        id="analyzeButton">
+        Ver desglose
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card hidden" id="mindResult">
+
+    <h2 id="resultTitle">
+      Tu desglose
+    </h2>
+
+    <div id="resultContent"></div>
+
+    <div class="button-row">
+
+      <button
+        class="secondary-button"
+        onclick="showSection('truth')"
+        id="goTruth">
+        🔎 Ir al Filtro de Verdad
+      </button>
+
+      <button
+        class="secondary-button"
+        onclick="showSection('promises')"
+        id="goPromises">
+        📖 Ver Promesas
+      </button>
+
+      <button
+        class="secondary-button"
+        onclick="showSection('calm')"
+        id="goCalm">
+        🌿 Hacer una Pausa de Calma
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRUTH FILTER
+===================================================== -->
+
+<section id="truth" class="section">
+
+  <div class="card">
+
+    <h2 id="truthTitle">
+      🔎 Filtro de Verdad
+    </h2>
+
+    <p class="subtitle" id="truthSubtitle">
+      No intenta convencerte de que todo estará bien.
+      Te ayuda a separar predicción, evidencia e interpretación.
+    </p>
+
+    <div class="field">
+
+      <label id="predictionLabel">
+        1. ¿Qué está prediciendo exactamente tu mente?
+      </label>
+
+      <textarea
+        id="prediction"
+        placeholder="Mi mente dice que..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="objectiveLabel">
+        2. ¿Qué evidencia objetiva tienes ahora?
+      </label>
+
+      <textarea
+        id="objective"
+        placeholder="Lo que realmente sé en este momento es..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="alternativeLabel">
+        3. ¿Qué otra explicación podría existir?
+      </label>
+
+      <textarea
+        id="alternative"
+        placeholder="Otra posibilidad podría ser..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="mindFunctionLabel">
+        4. ¿Qué está intentando hacer tu mente?
+      </label>
+
+      <select id="mindFunction"
+        style="width:100%;padding:12px;border:1px solid var(--border);border-radius:13px;background:white;">
+
+        <option value="check">Comprobar</option>
+        <option value="prevent">Prevenir</option>
+        <option value="certainty">Buscar certeza</option>
+        <option value="review">Revisar</option>
+        <option value="reassurance">Buscar tranquilidad</option>
+        <option value="control">Controlar</option>
+        <option value="avoid">Evitar equivocarme</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="balancedLabel">
+        5. ¿Cuál sería una respuesta más equilibrada?
+      </label>
+
+      <textarea
+        id="balanced"
+        placeholder="Puedo reconocer la incertidumbre sin convertirla en una certeza..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="button-row">
+
+      <button
+        class="primary-button"
+        onclick="saveTruth()"
+        id="saveTruthButton">
+        Guardar reflexión
+      </button>
+
+    </div>
+
+
+    <div
+      id="truthSaved"
+      class="result-box hidden">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CALM
+===================================================== -->
+
+<section id="calm" class="section">
+
+  <div class="card calm-container">
+
+    <h2 id="calmTitle">
+      🌿 Pausa de Calma
+    </h2>
+
+    <p class="subtitle" id="calmSubtitle">
+      Una pausa breve para bajar el ritmo y observar lo que está pasando,
+      sin intentar resolverlo todo ahora.
+    </p>
+
+
+    <div class="field" style="text-align:left;">
+
+      <label id="beforeLabel">
+        Antes de comenzar, ¿qué tan intensa es tu sensación ahora?
+      </label>
+
+      <div
+        class="scale-row"
+        id="beforeScale">
+      </div>
+
+      <div class="scale-caption">
+
+        <span id="beforeLow">
+          1 = muy baja
+        </span>
+
+        <span id="beforeHigh">
+          10 = muy intensa
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="selectedContext"
+      class="result-box"
+      style="text-align:left;">
+      <strong id="contextTitle">
+        Contexto
+      </strong>
+
+      <div id="contextText">
+        Puedes comenzar cuando estés listo/a.
+      </div>
+    </div>
+
+
+    <div class="breathing-stage">
+
+      <div
+        id="breathCircle"
+        class="breath-circle">
+
+        <div
+          id="breathNumber"
+          class="breath-number">
+          5
+        </div>
+
+        <div
+          id="breathPhase"
+          class="breath-phase">
+          Prepárate
+        </div>
+
+      </div>
+
+
+      <div
+        id="breathMessage"
+        class="breath-message">
+        Cuando estés listo/a, comienza.
+      </div>
+
+      <div
+        id="voiceStatus"
+        class="voice-status">
+      </div>
+
+    </div>
+
+
+    <button
+      id="calmStart"
+      class="calm-start"
+      onclick="startCalm()">
+      🌿 Iniciar Pausa de Calma
+    </button>
+
+
+    <div
+      id="afterArea"
+      class="field hidden"
+      style="text-align:left;">
+
+      <label id="afterLabel">
+        Después de la pausa, ¿qué tan intensa es ahora?
+      </label>
+
+      <div
+        class="scale-row"
+        id="afterScale">
+      </div>
+
+      <div class="scale-caption">
+
+        <span>
+          1
+        </span>
+
+        <span>
+          10
+        </span>
+
+      </div>
+
+      <div
+        id="comparison"
+        class="result-box hidden">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROMISES
+===================================================== -->
+
+<section id="promises" class="section">
+
+  <div class="card">
+
+    <h2 id="promisesTitle">
+      📖 Promesas para este momento
+    </h2>
+
+    <p class="subtitle" id="promisesSubtitle">
+      No son respuestas mágicas ni una garantía de resultados.
+      Son palabras que puedes leer lentamente y considerar.
+    </p>
+
+    <div id="promiseList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EVIDENCE
+===================================================== -->
+
+<section id="evidence" class="section">
+
+  <div class="card">
+
+    <h2 id="evidenceTitle">
+      📝 Evidencia
+    </h2>
+
+    <p class="subtitle" id="evidenceSubtitle">
+      Separa lo que sabes de lo que tu mente está interpretando.
+    </p>
+
+
+    <div class="field">
+
+      <label id="factLabel">
+        Hecho observable
+      </label>
+
+      <textarea
+        id="fact"
+        placeholder="¿Qué ocurrió realmente?"
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="interpretationLabel">
+        Interpretación
+      </label>
+
+      <textarea
+        id="interpretation"
+        placeholder="¿Qué significado le está dando tu mente?"
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label id="alternativeEvidenceLabel">
+        Otra posibilidad
+      </label>
+
+      <textarea
+        id="alternativeEvidence"
+        placeholder="¿Qué otra interpretación sería posible?"
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="primary-button"
+      onclick="saveEvidence()"
+      id="saveEvidenceButton">
+      Guardar
+    </button>
+
+
+    <div id="evidenceList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     LOAD
+===================================================== -->
+
+<section id="load" class="section">
+
+  <div class="card">
+
+    <h2 id="loadTitle">
+      ⚖️ Carga física y mental
+    </h2>
+
+    <p class="subtitle" id="loadSubtitle">
+      A veces el nivel de activación también puede verse influido
+      por factores básicos del cuerpo y del ritmo diario.
+    </p>
+
+
+    <div class="check-grid">
+
+      <label class="check-option">
+        <input type="checkbox" id="loadSleep">
+        <span id="sleepText">
+          Dormí poco o mal
+        </span>
+      </label>
+
+
+      <label class="check-option">
+        <input type="checkbox" id="loadWater">
+        <span id="waterText">
+          He tomado poca agua
+        </span>
+      </label>
+
+
+      <label class="check-option">
+        <input type="checkbox" id="loadScreens">
+        <span id="screensText">
+          He pasado demasiado tiempo frente a pantallas
+        </span>
+      </label>
+
+
+      <label class="check-option">
+        <input type="checkbox" id="loadFood">
+        <span id="foodText">
+          Me salté una comida o comí muy poco
+        </span>
+      </label>
+
+    </div>
+
+
+    <div class="button-row">
+
+      <button
+        class="primary-button"
+        onclick="analyzeLoad()"
+        id="loadButton">
+        Revisar carga
+      </button>
+
+    </div>
+
+
+    <div
+      id="loadResult"
+      class="result-box hidden">
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<div
+  class="disclaimer"
+  id="disclaimer">
+  Refugio Interior es una herramienta de reflexión, observación y regulación emocional.
+  No proporciona diagnóstico, psicoterapia, tratamiento médico ni garantiza resultados.
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   TESTER ACCESS
+===================================================== */
+
+/*
+  PILOT TESTER CODES
+
+  Puedes cambiar estos códigos antes de compartir la app.
+
+  IMPORTANTE:
+  Esta protección es práctica, no seguridad de servidor.
+*/
+
+const TESTERS = {
+
+  "TEST-001":{
+    name:"Tester 1",
+    expires:"2026-12-31"
+  },
+
+  "TEST-002":{
+    name:"Tester 2",
+    expires:"2026-12-31"
+  },
+
+  "TEST-003":{
+    name:"Tester 3",
+    expires:"2026-12-31"
+  },
+
+  "TEST-004":{
+    name:"Tester 4",
+    expires:"2026-12-31"
+  },
+
+  "TEST-005":{
+    name:"Tester 5",
+    expires:"2026-12-31"
+  }
+
+};
+
+
+const ACCESS_KEY = "refugioTesterAccess_v2";
+
+
+function getDeviceToken(){
+
+  let token = localStorage.getItem("refugioDeviceToken");
+
+  if(!token){
+
+    token =
+      Date.now().toString(36) +
+      "-" +
+      Math.random().toString(36).substring(2) +
+      "-" +
+      Math.random().toString(36).substring(2);
+
+    localStorage.setItem("refugioDeviceToken",token);
+
+  }
+
+  return token;
+
+}
+
+
+function checkTesterAccess(){
+
+  const input =
+    document.getElementById("testerCode");
+
+  const code =
+    input.value.trim().toUpperCase();
+
+  const error =
+    document.getElementById("accessError");
+
+  error.classList.add("hidden");
+
+  if(!code){
+
+    showAccessError(
+      currentLanguage === "es"
+      ? "Introduce tu código de prueba."
+      : "Enter your test code."
+    );
+
+    return;
+  }
+
+
+  const tester = TESTERS[code];
+
+  if(!tester){
+
+    showAccessError(
+      currentLanguage === "es"
+      ? "El código no es válido."
+      : "The code is not valid."
+    );
+
+    return;
+  }
+
+
+  const today =
+    new Date().toISOString().split("T")[0];
+
+  if(tester.expires < today){
+
+    showAccessError(
+      currentLanguage === "es"
+      ? "Este código de prueba ya expiró."
+      : "This test code has expired."
+    );
+
+    return;
+  }
+
+
+  const deviceToken = getDeviceToken();
+
+  const existing =
+    localStorage.getItem(ACCESS_KEY);
+
+
+  if(existing){
+
+    try{
+
+      const saved =
+        JSON.parse(existing);
+
+      if(saved.code !== code){
+
+        showAccessError(
+          currentLanguage === "es"
+          ? "Este dispositivo ya está asociado a otro código de prueba."
+          : "This device is already associated with another test code."
+        );
+
+        return;
+
+      }
+
+      if(saved.deviceToken !== deviceToken){
+
+        showAccessError(
+          currentLanguage === "es"
+          ? "Este código ya está asociado a otro dispositivo o navegador."
+          : "This code is already associated with another device or browser."
+        );
+
+        return;
+
+      }
+
+    }catch(e){
+
+      localStorage.removeItem(ACCESS_KEY);
+
+    }
+
+  }else{
+
+    localStorage.setItem(
+      ACCESS_KEY,
+      JSON.stringify({
+        code:code,
+        tester:tester.name,
+        deviceToken:deviceToken,
+        firstAccess:new Date().toISOString(),
+        expires:tester.expires
+      })
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "refugioTesterName",
+    tester.name
+  );
+
+  openApp();
+
+}
+
+
+function showAccessError(message){
+
+  const error =
+    document.getElementById("accessError");
+
+  error.textContent = message;
+
+  error.classList.remove("hidden");
+
+}
+
+
+function openApp(){
+
+  document
+    .getElementById("accessScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("app")
+    .classList.remove("hidden");
+
+  initializeApp();
+
+}
+
+
+/*
+  AUTO LOGIN FOR SAME TESTER
+*/
+
+function checkExistingAccess(){
+
+  const saved =
+    localStorage.getItem(ACCESS_KEY);
+
+  if(!saved) return;
+
+  try{
+
+    const data =
+      JSON.parse(saved);
+
+    const tester =
+      TESTERS[data.code];
+
+    const today =
+      new Date().toISOString().split("T")[0];
+
+    if(
+      tester &&
+      tester.expires >= today &&
+      data.deviceToken === getDeviceToken()
+    ){
+
+      openApp();
+
+    }
+
+  }catch(e){
+
+    localStorage.removeItem(ACCESS_KEY);
+
+  }
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+let currentLanguage =
+  localStorage.getItem("refugioLanguage") || "es";
+
+
+const translations = {
+
+  es:{
+
+    subtitle:"Mind & Soul Tool",
+
+    notice:
+      "Una herramienta de reflexión y regulación emocional. No es diagnóstico ni tratamiento.",
+
+    tabMind:"🧠 Desglose Mente",
+    tabTruth:"🔎 Filtro de Verdad",
+    tabCalm:"🌿 Pausa de Calma",
+    tabPromises:"📖 Promesas",
+    tabEvidence:"📝 Evidencia",
+    tabLoad:"⚖️ Carga física/mental",
+
+    mindTitle:"🧠 Desglose Mente",
+
+    mindSubtitle:
+      "Identifica qué tipo de pensamiento está apareciendo. No necesitas encontrar la explicación perfecta.",
+
+    areaSpiritual:"Espiritual",
+    areaSpiritualDesc:"Fe, culpa, duda, relación con Dios",
+
+    areaHealth:"Salud",
+    areaHealthDesc:"Síntomas, enfermedades, cuerpo",
+
+    areaRelationships:"Relaciones",
+    areaRelationshipsDesc:"Pareja, familia, rechazo, abandono",
+
+    areaFuture:"Futuro",
+    areaFutureDesc:"Incertidumbre, escenarios, catástrofes",
+
+    areaWork:"Trabajo / desempeño",
+    areaWorkDesc:"Perfeccionismo, errores, responsabilidad",
+
+    patternsTitle:
+      "¿Cuál de estos pensamientos se parece más al tuyo?",
+
+    patternsSubtitle:
+      "Puedes seleccionar más de uno.",
+
+    otherThoughtLabel:
+      "También puedes escribirlo con tus propias palabras",
+
+    analyzeButton:"Ver desglose",
+
+    resultTitle:"Tu desglose",
+
+    goTruth:"🔎 Ir al Filtro de Verdad",
+    goPromises:"📖 Ver Promesas",
+    goCalm:"🌿 Hacer una Pausa de Calma",
+
+    truthTitle:"🔎 Filtro de Verdad",
+
+    truthSubtitle:
+      "No intenta convencerte de que todo estará bien. Te ayuda a separar predicción, evidencia e interpretación.",
+
+    predictionLabel:
+      "1. ¿Qué está prediciendo exactamente tu mente?",
+
+    objectiveLabel:
+      "2. ¿Qué evidencia objetiva tienes ahora?",
+
+    alternativeLabel:
+      "3. ¿Qué otra explicación podría existir?",
+
+    mindFunctionLabel:
+      "4. ¿Qué está intentando hacer tu mente?",
+
+    balancedLabel:
+      "5. ¿Cuál sería una respuesta más equilibrada?",
+
+    saveTruthButton:"Guardar reflexión",
+
+    calmTitle:"🌿 Pausa de Calma",
+
+    calmSubtitle:
+      "Una pausa breve para bajar el ritmo y observar lo que está pasando, sin intentar resolverlo todo ahora.",
+
+    beforeLabel:
+      "Antes de comenzar, ¿qué tan intensa es tu sensación ahora?",
+
+    beforeLow:"1 = muy baja",
+    beforeHigh:"10 = muy intensa",
+
+    contextTitle:"Contexto",
+
+    contextText:
+      "Puedes comenzar cuando estés listo/a.",
+
+    afterLabel:
+      "Después de la pausa, ¿qué tan intensa es ahora?",
+
+    calmStart:"🌿 Iniciar Pausa de Calma",
+
+    promisesTitle:"📖 Promesas para este momento",
+
+    promisesSubtitle:
+      "No son respuestas mágicas ni una garantía de resultados. Son palabras que puedes leer lentamente y considerar.",
+
+    evidenceTitle:"📝 Evidencia",
+
+    evidenceSubtitle:
+      "Separa lo que sabes de lo que tu mente está interpretando.",
+
+    factLabel:"Hecho observable",
+    interpretationLabel:"Interpretación",
+    alternativeEvidenceLabel:"Otra posibilidad",
+
+    saveEvidenceButton:"Guardar",
+
+    loadTitle:"⚖️ Carga física y mental",
+
+    loadSubtitle:
+      "A veces el nivel de activación también puede verse influido por factores básicos del cuerpo y del ritmo diario.",
+
+    sleepText:"Dormí poco o mal",
+    waterText:"He tomado poca agua",
+    screensText:"He pasado demasiado tiempo frente a pantallas",
+    foodText:"Me salté una comida o comí muy poco",
+
+    loadButton:"Revisar carga",
+
+    disclaimer:
+      "Refugio Interior es una herramienta de reflexión, observación y regulación emocional. No proporciona diagnóstico, psicoterapia, tratamiento médico ni garantiza resultados."
+
+  },
+
+
+  en:{
+
+    subtitle:"Mind & Soul Tool",
+
+    notice:
+      "A reflection and emotional-regulation tool. It is not diagnosis or treatment.",
+
+    tabMind:"🧠 Mind Breakdown",
+    tabTruth:"🔎 Truth Filter",
+    tabCalm:"🌿 Calm Pause",
+    tabPromises:"📖 Promises",
+    tabEvidence:"📝 Evidence",
+    tabLoad:"⚖️ Physical/Mental Load",
+
+    mindTitle:"🧠 Mind Breakdown",
+
+    mindSubtitle:
+      "Identify what kind of thought is showing up. You do not need to find the perfect explanation.",
+
+    areaSpiritual:"Spiritual",
+    areaSpiritualDesc:"Faith, guilt, doubt, relationship with God",
+
+    areaHealth:"Health",
+    areaHealthDesc:"Symptoms, illness, body",
+
+    areaRelationships:"Relationships",
+    areaRelationshipsDesc:"Partner, family, rejection, abandonment",
+
+    areaFuture:"Future",
+    areaFutureDesc:"Uncertainty, scenarios, catastrophes",
+
+    areaWork:"Work / performance",
+    areaWorkDesc:"Perfectionism, mistakes, responsibility",
+
+    patternsTitle:
+      "Which of these thoughts feels most similar to yours?",
+
+    patternsSubtitle:
+      "You can select more than one.",
+
+    otherThoughtLabel:
+      "You can also describe it in your own words",
+
+    analyzeButton:"Break it down",
+
+    resultTitle:"Your breakdown",
+
+    goTruth:"🔎 Go to Truth Filter",
+    goPromises:"📖 View Promises",
+    goCalm:"🌿 Take a Calm Pause",
+
+    truthTitle:"🔎 Truth Filter",
+
+    truthSubtitle:
+      "It does not try to convince you that everything will be fine. It helps separate prediction, evidence and interpretation.",
+
+    predictionLabel:
+      "1. What exactly is your mind predicting?",
+
+    objectiveLabel:
+      "2. What objective evidence do you have right now?",
+
+    alternativeLabel:
+      "3. What other explanation could exist?",
+
+    mindFunctionLabel:
+      "4. What is your mind trying to do?",
+
+    balancedLabel:
+      "5. What would be a more balanced response?",
+
+    saveTruthButton:"Save reflection",
+
+    calmTitle:"🌿 Calm Pause",
+
+    calmSubtitle:
+      "A brief pause to slow down and observe what is happening, without trying to solve everything right now.",
+
+    beforeLabel:
+      "Before beginning, how intense does this feel right now?",
+
+    beforeLow:"1 = very low",
+    beforeHigh:"10 = very intense",
+
+    contextTitle:"Context",
+
+    contextText:
+      "You can begin whenever you are ready.",
+
+    afterLabel:
+      "After the pause, how intense does it feel now?",
+
+    calmStart:"🌿 Start Calm Pause",
+
+    promisesTitle:"📖 Promises for this moment",
+
+    promisesSubtitle:
+      "They are not magical answers or guarantees. They are words you can read slowly and consider.",
+
+    evidenceTitle:"📝 Evidence",
+
+    evidenceSubtitle:
+      "Separate what you know from what your mind is interpreting.",
+
+    factLabel:"Observable fact",
+    interpretationLabel:"Interpretation",
+    alternativeEvidenceLabel:"Another possibility",
+
+    saveEvidenceButton:"Save",
+
+    loadTitle:"⚖️ Physical and mental load",
+
+    loadSubtitle:
+      "Sometimes your level of activation can also be influenced by basic physical and daily-rhythm factors.",
+
+    sleepText:"I slept too little or poorly",
+    waterText:"I have had little water",
+    screensText:"I have spent too much time on screens",
+    foodText:"I skipped a meal or ate very little",
+
+    loadButton:"Review load",
+
+    disclaimer:
+      "Refugio Interior is a reflection, observation and emotional-regulation tool. It does not provide diagnosis, psychotherapy, medical treatment or guaranteed results."
+
+  }
+
+};
+
+
+/* =====================================================
+   PATTERNS
+===================================================== */
+
+const patterns = {
+
+  spiritual:[
+    {
+      id:"spiritual_doubt",
+      es:"Siento que debería estar completamente seguro/a de mi fe.",
+      en:"I feel like I should be completely certain about my faith."
+    },
+    {
+      id:"spiritual_guilt",
+      es:"Tengo miedo de haber hecho algo espiritualmente incorrecto.",
+      en:"I am afraid I may have done something spiritually wrong."
+    },
+    {
+      id:"spiritual_rejection",
+      es:"Me preocupa que Dios esté enojado conmigo o me haya rechazado.",
+      en:"I worry that God is angry with me or has rejected me."
+    },
+    {
+      id:"spiritual_wrong_prayer",
+      es:"Me preocupa no haber orado correctamente.",
+      en:"I worry that I did not pray correctly."
+    },
+    {
+      id:"spiritual_signs",
+      es:"Siento que necesito encontrar una señal para saber qué hacer.",
+      en:"I feel like I need to find a sign to know what to do."
+    },
+    {
+      id:"spiritual_reassurance",
+      es:"Necesito volver a comprobar que Dios me perdona o que estoy bien con Él.",
+      en:"I need to check again that God forgives me or that I am okay with Him."
+    },
+    {
+      id:"spiritual_thought",
+      es:"Me preocupa que un pensamiento involuntario diga algo sobre mi fe o mi carácter.",
+      en:"I worry that an unwanted thought says something about my faith or character."
+    }
+  ],
+
+  health:[
+    {
+      id:"health_symptom",
+      es:"Un síntoma me hace pensar que podría tener algo grave.",
+      en:"A symptom makes me think I may have something serious."
+    },
+    {
+      id:"health_check",
+      es:"Siento la necesidad de revisar mi cuerpo repetidamente.",
+      en:"I feel the need to repeatedly check my body."
+    },
+    {
+      id:"health_search",
+      es:"Quiero buscar información para asegurarme de que no sea algo malo.",
+      en:"I want to search for information to make sure it is not something bad."
+    },
+    {
+      id:"health_worst",
+      es:"Mi mente se va directamente al peor diagnóstico posible.",
+      en:"My mind goes directly to the worst possible diagnosis."
+    },
+    {
+      id:"health_uncertainty",
+      es:"Me cuesta aceptar que no puedo tener certeza absoluta sobre mi salud.",
+      en:"I struggle to accept that I cannot have absolute certainty about my health."
+    },
+    {
+      id:"health_body",
+      es:"Estoy observando constantemente cambios o sensaciones en mi cuerpo.",
+      en:"I am constantly monitoring changes or sensations in my body."
+    }
+  ],
+
+  relationships:[
+    {
+      id:"relationship_rejection",
+      es:"Temo que alguien esté molesto conmigo aunque no tenga evidencia clara.",
+      en:"I fear someone is upset with me even though I do not have clear evidence."
+    },
+    {
+      id:"relationship_abandonment",
+      es:"Me preocupa que alguien vaya a alejarse o abandonarme.",
+      en:"I worry that someone will leave or abandon me."
+    },
+    {
+      id:"relationship_message",
+      es:"Analizo demasiado un mensaje, tono o comentario.",
+      en:"I overanalyze a message, tone or comment."
+    },
+    {
+      id:"relationship_reassurance",
+      es:"Necesito preguntar varias veces si todo está bien.",
+      en:"I need to ask repeatedly whether everything is okay."
+    },
+    {
+      id:"relationship_mistake",
+      es:"Temo haber dicho o hecho algo que dañó la relación.",
+      en:"I fear I said or did something that damaged the relationship."
+    },
+    {
+      id:"relationship_mindreading",
+      es:"Intento saber exactamente lo que la otra persona está pensando.",
+      en:"I try to know exactly what the other person is thinking."
+    }
+  ],
+
+  future:[
+    {
+      id:"future_catastrophe",
+      es:"Mi mente imagina automáticamente el peor escenario.",
+      en:"My mind automatically imagines the worst-case scenario."
+    },
+    {
+      id:"future_uncertainty",
+      es:"Siento que necesito saber exactamente qué va a pasar.",
+      en:"I feel like I need to know exactly what will happen."
+    },
+    {
+      id:"future_prevention",
+      es:"Pienso repetidamente en todo lo que podría salir mal para intentar prevenirlo.",
+      en:"I repeatedly think about everything that could go wrong to try to prevent it."
+    },
+    {
+      id:"future_control",
+      es:"Siento que si pienso lo suficiente podré controlar el resultado.",
+      en:"I feel that if I think enough I can control the outcome."
+    },
+    {
+      id:"future_decision",
+      es:"Temo tomar una decisión equivocada que afecte mi futuro.",
+      en:"I fear making the wrong decision and affecting my future."
+    },
+    {
+      id:"future_if",
+      es:"Me quedo atrapado/a en escenarios de '¿y si...?'",
+      en:"I get stuck in 'what if...' scenarios."
+    }
+  ],
+
+  work:[
+    {
+      id:"work_perfection",
+      es:"Siento que tengo que hacerlo perfectamente.",
+      en:"I feel like I have to do it perfectly."
+    },
+    {
+      id:"work_mistake",
+      es:"Me preocupa haber cometido un error y sus consecuencias.",
+      en:"I worry that I made a mistake and about its consequences."
+    },
+    {
+      id:"work_review",
+      es:"Reviso repetidamente lo que hice para asegurarme.",
+      en:"I repeatedly review what I did to make sure."
+    },
+    {
+      id:"work_responsibility",
+      es:"Siento que todo depende de mí.",
+      en:"I feel like everything depends on me."
+    },
+    {
+      id:"work_failure",
+      es:"Temo que un error signifique que no soy suficientemente capaz.",
+      en:"I fear that a mistake means I am not capable enough."
+    },
+    {
+      id:"work_control",
+      es:"Intento anticipar todos los problemas antes de empezar.",
+      en:"I try to anticipate every problem before starting."
+    }
+  ]
+
+};
+
+
+/* =====================================================
+   PROMISES
+===================================================== */
+
+const promises = [
+
+  {
+    es:"Puedes entregar tus preocupaciones a Dios en lugar de intentar resolverlas todas mentalmente.",
+    en:"You can bring your worries to God instead of trying to mentally solve them all.",
+    ref:"1 Pedro 5:7"
+  },
+
+  {
+    es:"No tienes que tener todas las respuestas hoy.",
+    en:"You do not have to have every answer today.",
+    ref:"Proverbios 3:5–6"
+  },
+
+  {
+    es:"La incertidumbre no significa que algo malo esté ocurriendo.",
+    en:"Uncertainty does not mean that something bad is happening.",
+    ref:"Mateo 6:34"
+  },
+
+  {
+    es:"Puedes detenerte, respirar y responder al momento presente.",
+    en:"You can pause, breathe and respond to the present moment.",
+    ref:"Salmo 46:10"
+  },
+
+  {
+    es:"Tu valor no depende de hacerlo todo perfectamente.",
+    en:"Your worth does not depend on doing everything perfectly.",
+    ref:"Efesios 2:10"
+  },
+
+  {
+    es:"Puedes reconocer un pensamiento sin tratarlo como un hecho.",
+    en:"You can notice a thought without treating it as a fact.",
+    ref:"Romanos 12:2"
+  },
+
+  {
+    es:"No necesitas perseguir certeza absoluta para continuar con tu día.",
+    en:"You do not need to pursue absolute certainty to continue with your day.",
+    ref:"Filipenses 4:6–7"
+  },
+
+  {
+    es:"Puedes elegir una respuesta tranquila aunque todavía exista incertidumbre.",
+    en:"You can choose a calm response even when uncertainty remains.",
+    ref:"Isaías 41:10"
+  },
+
+  {
+    es:"Puedes dejar espacio para lo que todavía no sabes.",
+    en:"You can make room for what you do not know yet.",
+    ref:"Salmo 37:5"
+  },
+
+  {
+    es:"No todo pensamiento necesita una respuesta inmediata.",
+    en:"Not every thought needs an immediate response.",
+    ref:"Salmo 131:2"
+  },
+
+  {
+    es:"Puedes descansar sin resolver todos los escenarios posibles.",
+    en:"You can rest without solving every possible scenario.",
+    ref:"Mateo 11:28"
+  },
+
+  {
+    es:"Tu mente puede pedir certeza; tú puedes elegir observar antes de reaccionar.",
+    en:"Your mind may ask for certainty; you can choose to observe before reacting.",
+    ref:"Santiago 1:19"
+  },
+
+  {
+    es:"Puedes actuar según tus valores aunque tu mente todavía tenga dudas.",
+    en:"You can act according to your values even while your mind still has doubts.",
+    ref:"Gálatas 5:13"
+  },
+
+  {
+    es:"La paz no siempre significa tener todas las respuestas.",
+    en:"Peace does not always mean having every answer.",
+    ref:"Juan 14:27"
+  }
+
+];
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let selectedArea = null;
+
+let selectedPatterns = [];
+
+let beforeIntensity = null;
+
+let afterIntensity = null;
+
+let calmRunning = false;
+
+let calmTimer = null;
+
+let phaseTimer = null;
+
+let currentPhase = "";
+
+let currentCycle = 0;
+
+const totalCycles = 3;
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+function initializeApp(){
+
+  setLanguage(currentLanguage);
+
+  renderPromises();
+
+  renderEvidence();
+
+  createScales();
+
+  updateContext();
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+function setLanguage(lang){
+
+  currentLanguage = lang;
+
+  localStorage.setItem(
+    "refugioLanguage",
+    lang
+  );
+
+  document.documentElement.lang = lang;
+
+  const t = translations[lang];
+
+  Object.keys(t).forEach(key=>{
+
+    const element =
+      document.getElementById(key);
+
+    if(element){
+
+      element.textContent = t[key];
+
+    }
+
+  });
+
+
+  document
+    .getElementById("langES")
+    .classList.toggle(
+      "active",
+      lang === "es"
+    );
+
+  document
+    .getElementById("langEN")
+    .classList.toggle(
+      "active",
+      lang === "en"
+    );
+
+
+  renderPatterns();
+
+  renderPromises();
+
+  renderEvidence();
+
+  updateAccessLanguage();
+
+  updateContext();
+
+  if(!calmRunning){
+
+    document.getElementById("breathMessage").textContent =
+      lang === "es"
+      ? "Cuando estés listo/a, comienza."
+      : "Begin whenever you are ready.";
+
+  }
+
+}
+
+
+/* =====================================================
+   ACCESS LANGUAGE
+===================================================== */
+
+function updateAccessLanguage(){
+
+  const es =
+    currentLanguage === "es";
+
+  document.getElementById("accessDescription").textContent =
+    es
+    ? "Esta versión está disponible para participantes de prueba."
+    : "This version is available for test participants.";
+
+  document.getElementById("testerCode").placeholder =
+    es
+    ? "Código de prueba"
+    : "Test code";
+
+  document.getElementById("accessButton").textContent =
+    es
+    ? "Entrar"
+    : "Enter";
+
+  document.getElementById("accessNote").textContent =
+    es
+    ? "Tu código es individual y está destinado únicamente a tu prueba."
+    : "Your code is individual and intended only for your test.";
+
+}
+
+
+/* =====================================================
+   SECTION NAVIGATION
+===================================================== */
+
+function showSection(id,button){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+  const section =
+    document.getElementById(id);
+
+  if(section){
+    section.classList.add("active");
+  }
+
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(tab=>{
+      tab.classList.remove("active");
+    });
+
+
+  if(button){
+    button.classList.add("active");
+  }else{
+
+    const tab =
+      document.querySelector(
+        `.tab[data-section="${id}"]`
+      );
+
+    if(tab) tab.classList.add("active");
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   AREAS
+===================================================== */
+
+function selectArea(area,button){
+
+  selectedArea = area;
+
+  selectedPatterns = [];
+
+  document
+    .querySelectorAll(".area-button")
+    .forEach(btn=>{
+      btn.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  document
+    .getElementById("patternsCard")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("mindResult")
+    .classList.add("hidden");
+
+  renderPatterns();
+
+  updateContext();
+
+}
+
+
+function renderPatterns(){
+
+  const container =
+    document.getElementById("patterns");
+
+  if(!container) return;
+
+  if(!selectedArea){
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+  const list =
+    patterns[selectedArea] || [];
+
+  container.innerHTML = "";
+
+  list.forEach(item=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className = "pattern";
+
+    if(selectedPatterns.includes(item.id)){
+      button.classList.add("selected");
+    }
+
+    button.textContent =
+      item[currentLanguage];
+
+    button.onclick = ()=>{
+
+      if(selectedPatterns.includes(item.id)){
+
+        selectedPatterns =
+          selectedPatterns.filter(
+            id=>id !== item.id
+          );
+
+        button.classList.remove("selected");
+
+      }else{
+
+        selectedPatterns.push(item.id);
+
+        button.classList.add("selected");
+
+      }
+
+    };
+
+    container.appendChild(button);
+
+  });
+
+}
+
+
+/* =====================================================
+   THOUGHT ANALYSIS
+===================================================== */
+
+function analyzeThought(){
+
+  const text =
+    document.getElementById("thoughtText")
+    .value.trim();
+
+  if(
+    selectedPatterns.length === 0 &&
+    !text
+  ){
+
+    alert(
+      currentLanguage === "es"
+      ? "Selecciona al menos una opción o escribe tu pensamiento."
+      : "Select at least one option or write your thought."
+    );
+
+    return;
+
+  }
+
+
+  const areaName =
+    getAreaName(selectedArea);
+
+  const list =
+    patterns[selectedArea] || [];
+
+  const selectedText =
+    list
+      .filter(item=>
+        selectedPatterns.includes(item.id)
+      )
+      .map(item=>item[currentLanguage]);
+
+
+  const container =
+    document.getElementById("resultContent");
+
+  let html = "";
+
+  html += `
+    <div class="result-box">
+      <strong>
+        ${escapeHtml(areaName)}
+      </strong>
+  `;
+
+
+  if(selectedText.length){
+
+    html += `
+      <p>
+        <strong>
+          ${
+            currentLanguage === "es"
+            ? "Patrones identificados:"
+            : "Patterns identified:"
+          }
+        </strong>
+      </p>
+      <ul>
+    `;
+
+    selectedText.forEach(item=>{
+      html += `<li>${escapeHtml(item)}</li>`;
+    });
+
+    html += "</ul>";
+
+  }
+
+
+  if(text){
+
+    html += `
+      <p>
+        <strong>
+          ${
+            currentLanguage === "es"
+            ? "Tus palabras:"
+            : "Your words:"
+          }
+        </strong>
+      </p>
+
+      <p>
+        ${escapeHtml(text)}
+      </p>
+    `;
+
+  }
+
+  html += "</div>";
+
+
+  html += `
+    <div class="recommendation">
+
+      <strong>
+        ${
+          currentLanguage === "es"
+          ? "Una observación útil:"
+          : "A useful observation:"
+        }
+      </strong>
+
+      <p>
+        ${
+          getRecommendation()
+        }
+      </p>
+
+    </div>
+  `;
+
+
+  container.innerHTML = html;
+
+  document
+    .getElementById("mindResult")
+    .classList.remove("hidden");
+
+
+  localStorage.setItem(
+    "refugioLastArea",
+    selectedArea
+  );
+
+}
+
+
+function getAreaName(area){
+
+  const map = {
+
+    spiritual:
+      currentLanguage === "es"
+      ? "Espiritual"
+      : "Spiritual",
+
+    health:
+      currentLanguage === "es"
+      ? "Salud"
+      : "Health",
+
+    relationships:
+      currentLanguage === "es"
+      ? "Relaciones"
+      : "Relationships",
+
+    future:
+      currentLanguage === "es"
+      ? "Futuro"
+      : "Future",
+
+    work:
+      currentLanguage === "es"
+      ? "Trabajo / desempeño"
+      : "Work / performance"
+
+  };
+
+  return map[area] || "";
+
+}
+
+
+function getRecommendation(){
+
+  const recommendations = {
+
+    spiritual:{
+      es:"Puede ser útil distinguir entre una duda que puedes observar y la necesidad de obtener certeza espiritual inmediata. No todo pensamiento involuntario requiere una respuesta.",
+      en:"It may help to distinguish between a doubt you can observe and the need to obtain immediate spiritual certainty. Not every unwanted thought requires a response."
+    },
+
+    health:{
+      es:"Un pensamiento sobre salud puede sentirse urgente sin ser una conclusión. Puedes separar la sensación, la interpretación y la información objetiva disponible.",
+      en:"A health-related thought can feel urgent without being a conclusion. You can separate the sensation, the interpretation and the objective information available."
+    },
+
+    relationships:{
+      es:"La mente puede intentar leer señales para eliminar la incertidumbre. Puedes reconocer lo que sabes sin convertir una posibilidad en un hecho.",
+      en:"The mind may try to read signals to eliminate uncertainty. You can recognize what you know without turning a possibility into a fact."
+    },
+
+    future:{
+      es:"Imaginar escenarios puede dar una sensación momentánea de control, pero pensar más no garantiza certeza. Puedes volver a lo que sí puedes hacer ahora.",
+      en:"Imagining scenarios can create a temporary sense of control, but more thinking does not guarantee certainty. You can return to what you can actually do now."
+    },
+
+    work:{
+      es:"La responsabilidad y el perfeccionismo pueden hacer que un error parezca más grande de lo que objetivamente es. Puedes buscar una respuesta suficientemente buena.",
+      en:"Responsibility and perfectionism can make a mistake feel larger than it objectively is. You can look for a response that is good enough."
+    }
+
+  };
+
+  return recommendations[selectedArea]
+    ? recommendations[selectedArea][currentLanguage]
+    : "";
+
+}
+
+
+/* =====================================================
+   CONTEXT FOR CALM
+===================================================== */
+
+function updateContext(){
+
+  const context =
+    document.getElementById("contextText");
+
+  if(!context) return;
+
+  if(!selectedArea){
+
+    context.textContent =
+      translations[currentLanguage].contextText;
+
+    return;
+
+  }
+
+  const messages = {
+
+    spiritual:{
+      es:"Tu pausa puede enfocarse en soltar la necesidad de certeza espiritual inmediata y volver al presente.",
+      en:"Your pause can focus on releasing the need for immediate spiritual certainty and returning to the present."
+    },
+
+    health:{
+      es:"Tu pausa puede ayudarte a observar las sensaciones sin convertirlas automáticamente en una conclusión.",
+      en:"Your pause can help you observe sensations without automatically turning them into a conclusion."
+    },
+
+    relationships:{
+      es:"Tu pausa puede ayudarte a dejar de analizar temporalmente las señales y volver al momento presente.",
+      en:"Your pause can help you temporarily step away from analyzing signals and return to the present."
+    },
+
+    future:{
+      es:"Tu pausa puede ayudarte a dejar por unos momentos los escenarios futuros y volver a lo que existe ahora.",
+      en:"Your pause can help you step away from future scenarios for a moment and return to what exists now."
+    },
+
+    work:{
+      es:"Tu pausa puede ayudarte a soltar temporalmente la necesidad de revisar o perfeccionar y simplemente respirar.",
+      en:"Your pause can help you temporarily release the need to review or perfect and simply breathe."
+    }
+
+  };
+
+  context.textContent =
+    messages[selectedArea]
+      ? messages[selectedArea][currentLanguage]
+      : translations[currentLanguage].contextText;
+
+}
+
+
+/* =====================================================
+   SCALES
+===================================================== */
+
+function createScales(){
+
+  const before =
+    document.getElementById("beforeScale");
+
+  const after =
+    document.getElementById("afterScale");
+
+  before.innerHTML = "";
+  after.innerHTML = "";
+
+  for(let i=1;i<=10;i++){
+
+    const b =
+      document.createElement("button");
+
+    b.className = "scale-button";
+    b.textContent = i;
+
+    b.onclick = ()=>{
+      beforeIntensity = i;
+
+      before
+        .querySelectorAll(".scale-button")
+        .forEach(x=>x.classList.remove("selected"));
+
+      b.classList.add("selected");
+    };
+
+    before.appendChild(b);
+
+
+    const a =
+      document.createElement("button");
+
+    a.className = "scale-button";
+    a.textContent = i;
+
+    a.onclick = ()=>{
+      afterIntensity = i;
+
+      after
+        .querySelectorAll(".scale-button")
+        .forEach(x=>x.classList.remove("selected"));
+
+      a.classList.add("selected");
+
+      showComparison();
+
+    };
+
+    after.appendChild(a);
+
+  }
+
+}
+
+
+/* =====================================================
+   CALM SESSION
+===================================================== */
+
+function startCalm(){
+
+  if(calmRunning) return;
+
+  if(!beforeIntensity){
+
+    alert(
+      currentLanguage === "es"
+      ? "Primero selecciona una intensidad del 1 al 10."
+      : "First select an intensity from 1 to 10."
+    );
+
+    return;
+
+  }
+
+
+  calmRunning = true;
+
+  afterIntensity = null;
+
+  document
+    .getElementById("afterArea")
+    .classList.add("hidden");
+
+  document
+    .getElementById("comparison")
+    .classList.add("hidden");
+
+  document
+    .getElementById("calmStart")
+    .disabled = true;
+
+  document
+    .getElementById("calmStart")
+    .style.opacity = ".6";
+
+
+  currentCycle = 0;
+
+  runPreparation();
+
+}
+
+
+function runPreparation(){
+
+  const circle =
+    document.getElementById("breathCircle");
+
+  circle.className =
+    "breath-circle prep";
+
+  currentPhase = "prep";
+
+  const seconds = 5;
+
+  speakPhase(
+    currentLanguage === "es"
+    ? "Prepárate. Vamos a comenzar."
+    : "Get ready. We are about to begin."
+  );
+
+
+  countdown(
+    seconds,
+    currentLanguage === "es"
+      ? "Prepárate"
+      : "Get ready",
+    ()=>{
+      runCycle();
+    }
+  );
+
+}
+
+
+function runCycle(){
+
+  if(currentCycle >= totalCycles){
+
+    finishCalm();
+
+    return;
+
+  }
+
+  currentCycle++;
+
+  runPhase(
+    "inhale",
+    4,
+    currentLanguage === "es"
+      ? "Inhala lentamente"
+      : "Breathe in slowly",
+    ()=>{
+      runPhase(
+        "hold",
+        2,
+        currentLanguage === "es"
+          ? "Sostén suavemente"
+          : "Hold gently",
+        ()=>{
+          runPhase(
+            "exhale",
+            6,
+            currentLanguage === "es"
+              ? "Exhala lentamente"
+              : "Breathe out slowly",
+            ()=>{
+              runCycle();
+            }
+          );
+        }
+      );
+    }
+  );
+
+}
+
+
+function runPhase(
+  phase,
+  seconds,
+  label,
+  callback
+){
+
+  const circle =
+    document.getElementById("breathCircle");
+
+  const phaseElement =
+    document.getElementById("breathPhase");
+
+  circle.className =
+    "breath-circle " + phase;
+
+  currentPhase = phase;
+
+  phaseElement.textContent =
+    label;
+
+  speakPhase(
+    getPhaseVoice(
+      phase
+    )
+  );
+
+  updateBreathMessage(
+    phase
+  );
+
+  countdown(
+    seconds,
+    label,
+    callback
+  );
+
+}
+
+
+function countdown(
+  seconds,
+  label,
+  callback
+){
+
+  let remaining = seconds;
+
+  const number =
+    document.getElementById("breathNumber");
+
+  const phase =
+    document.getElementById("breathPhase");
+
+  number.textContent = remaining;
+
+  phase.textContent = label;
+
+
+  clearInterval(phaseTimer);
+
+  phaseTimer =
+    setInterval(()=>{
+
+      remaining--;
+
+      if(remaining <= 0){
+
+        clearInterval(phaseTimer);
+
+        callback();
+
+      }else{
+
+        number.textContent =
+          remaining;
+
+      }
+
+    },1000);
+
+}
+
+
+function getPhaseVoice(phase){
+
+  const spiritual =
+    selectedArea === "spiritual";
+
+  if(currentLanguage === "es"){
+
+    if(phase === "inhale"){
+
+      return spiritual
+        ? "Inhala lentamente. Puedes descansar por un momento."
+        : "Inhala lentamente. No necesitas resolver nada ahora.";
+
+    }
+
+    if(phase === "hold"){
+
+      return spiritual
+        ? "Sostén suavemente. No tienes que encontrar certeza."
+        : "Sostén suavemente. Permite que el momento sea como es.";
+
+    }
+
+    if(phase === "exhale"){
+
+      return spiritual
+        ? "Exhala lentamente. Puedes entregar esta preocupación a Dios."
+        : "Exhala lentamente. Suelta un poco de tensión.";
+
+    }
+
+  }else{
+
+    if(phase === "inhale"){
+
+      return spiritual
+        ? "Breathe in slowly. You can rest for a moment."
+        : "Breathe in slowly. You do not need to solve anything right now.";
+
+    }
+
+    if(phase === "hold"){
+
+      return spiritual
+        ? "Hold gently. You do not have to find certainty."
+        : "Hold gently. Allow this moment to be as it is.";
+
+    }
+
+    if(phase === "exhale"){
+
+      return spiritual
+        ? "Breathe out slowly. You can give this concern to God."
+        : "Breathe out slowly. Release some tension.";
+
+    }
+
+  }
+
+  return "";
+}
+
+
+function updateBreathMessage(phase){
+
+  const element =
+    document.getElementById("breathMessage");
+
+  const spiritual =
+    selectedArea === "spiritual";
+
+  let text = "";
+
+
+  if(currentLanguage === "es"){
+
+    if(phase === "inhale"){
+
+      text =
+        spiritual
+        ? "Puedes estar aquí sin resolver tu duda ahora."
+        : "Solo observa la respiración. No necesitas solucionar todo.";
+
+    }
+
+    if(phase === "hold"){
+
+      text =
+        spiritual
+        ? "Un pensamiento no tiene que convertirse en una respuesta."
+        : "Permite que la sensación exista sin analizarla.";
+
+    }
+
+    if(phase === "exhale"){
+
+      text =
+        spiritual
+        ? "“Echen sobre Él toda su ansiedad.” — 1 Pedro 5:7"
+        : "Deja que la exhalación marque una pequeña pausa.";
+
+    }
+
+  }else{
+
+    if(phase === "inhale"){
+
+      text =
+        spiritual
+        ? "You can be here without solving your doubt right now."
+        : "Simply notice the breath. You do not need to solve everything.";
+
+    }
+
+    if(phase === "hold"){
+
+      text =
+        spiritual
+        ? "A thought does not have to become a response."
+        : "Allow the sensation to exist without analyzing it.";
+
+    }
+
+    if(phase === "exhale"){
+
+      text =
+        spiritual
+        ? "“Cast all your anxiety on Him.” — 1 Peter 5:7"
+        : "Let the exhale create a small pause.";
+
+    }
+
+  }
+
+  element.textContent = text;
+
+}
+
+
+/* =====================================================
+   NATURAL VOICE
+===================================================== */
+
+function speakPhase(text){
+
+  if(!("speechSynthesis" in window)){
+
+    document.getElementById("voiceStatus").textContent =
+      currentLanguage === "es"
+      ? "La voz no está disponible en este navegador."
+      : "Voice is not available in this browser.";
+
+    return;
+
+  }
+
+
+  /*
+    Cancel any previous phrase so voices
+    never overlap or continue into the next phase.
+  */
+
+  window.speechSynthesis.cancel();
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+
+  utterance.lang =
+    currentLanguage === "es"
+      ? "es-MX"
+      : "en-US";
+
+
+  utterance.rate = .72;
+
+  utterance.pitch = .96;
+
+  utterance.volume = .95;
+
+
+  const voices =
+    window.speechSynthesis.getVoices();
+
+
+  let selectedVoice = null;
+
+
+  if(currentLanguage === "es"){
+
+    selectedVoice =
+      voices.find(v=>
+        /es-MX/i.test(v.lang)
+      ) ||
+
+      voices.find(v=>
+        /es-US/i.test(v.lang)
+      ) ||
+
+      voices.find(v=>
+        /^es/i.test(v.lang)
+      );
+
+  }else{
+
+    selectedVoice =
+      voices.find(v=>
+        /en-US/i.test(v.lang)
+      ) ||
+
+      voices.find(v=>
+        /^en/i.test(v.lang)
+      );
+
+  }
+
+
+  if(selectedVoice){
+
+    utterance.voice =
+      selectedVoice;
+
+  }
+
+
+  utterance.onstart = ()=>{
+
+    document
+      .getElementById("voiceStatus")
+      .textContent =
+      currentLanguage === "es"
+      ? "🔊 Escuchando instrucciones"
+      : "🔊 Listening to instructions";
+
+  };
+
+
+  utterance.onend = ()=>{
+
+    document
+      .getElementById("voiceStatus")
+      .textContent = "";
+
+  };
+
+
+  utterance.onerror = ()=>{
+
+    document
+      .getElementById("voiceStatus")
+      .textContent = "";
+
+  };
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/*
+  Some mobile browsers load voices asynchronously.
+*/
+
+if("speechSynthesis" in window){
+
+  window.speechSynthesis.onvoiceschanged =
+    ()=>{
+
+      window.speechSynthesis.getVoices();
+
+    };
+
+}
+
+
+/* =====================================================
+   FINISH CALM
+===================================================== */
+
+function finishCalm(){
+
+  clearInterval(phaseTimer);
+
+  calmRunning = false;
+
+  window.speechSynthesis.cancel();
+
+  const circle =
+    document.getElementById("breathCircle");
+
+  circle.className =
+    "breath-circle prep";
+
+  document
+    .getElementById("breathNumber")
+    .textContent = "✓";
+
+  document
+    .getElementById("breathPhase")
+    .textContent =
+    currentLanguage === "es"
+      ? "Pausa completa"
+      : "Pause complete";
+
+
+  document
+    .getElementById("breathMessage")
+    .textContent =
+    currentLanguage === "es"
+      ? "Tómate unos segundos antes de volver a lo que estabas haciendo."
+      : "Take a few seconds before returning to what you were doing.";
+
+
+  document
+    .getElementById("calmStart")
+    .disabled = false;
+
+  document
+    .getElementById("calmStart")
+    .style.opacity = "1";
+
+
+  document
+    .getElementById("afterArea")
+    .classList.remove("hidden");
+
+
+  saveSession();
+
+}
+
+
+/* =====================================================
+   COMPARISON
+===================================================== */
+
+function showComparison(){
+
+  if(
+    !beforeIntensity ||
+    !afterIntensity
+  ) return;
+
+
+  const difference =
+    beforeIntensity -
+    afterIntensity;
+
+
+  const comparison =
+    document.getElementById("comparison");
+
+
+  let message = "";
+
+
+  if(currentLanguage === "es"){
+
+    if(difference > 0){
+
+      message =
+        `Tu intensidad pasó de ${beforeIntensity}/10 a ${afterIntensity}/10. ` +
+        `La diferencia fue de ${difference} punto(s). ` +
+        `Puedes observar este cambio sin necesidad de interpretarlo como una garantía para futuras situaciones.`;
+
+    }else if(difference === 0){
+
+      message =
+        `Tu intensidad se mantuvo en ${afterIntensity}/10. ` +
+        `Eso también es información útil. Una pausa no necesita producir un cambio inmediato para ser una práctica válida.`;
+
+    }else{
+
+      message =
+        `Tu intensidad pasó de ${beforeIntensity}/10 a ${afterIntensity}/10. ` +
+        `Por ahora aumentó ${Math.abs(difference)} punto(s). ` +
+        `Puedes simplemente observarlo y decidir qué necesitas en este momento.`;
+
+    }
+
+  }else{
+
+    if(difference > 0){
+
+      message =
+        `Your intensity went from ${beforeIntensity}/10 to ${afterIntensity}/10. ` +
+        `The difference was ${difference} point(s). ` +
+        `You can observe this change without treating it as a guarantee for future situations.`;
+
+    }else if(difference === 0){
+
+      message =
+        `Your intensity remained at ${afterIntensity}/10. ` +
+        `That is useful information too. A pause does not need to create an immediate change to be a valid practice.`;
+
+    }else{
+
+      message =
+        `Your intensity went from ${beforeIntensity}/10 to ${afterIntensity}/10. ` +
+        `For now it increased by ${Math.abs(difference)} point(s). ` +
+        `You can simply observe it and decide what you need right now.`;
+
+    }
+
+  }
+
+
+  comparison.textContent =
+    message;
+
+  comparison.classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   SAVE SESSION
+===================================================== */
+
+function saveSession(){
+
+  const sessions =
+    JSON.parse(
+      localStorage.getItem(
+        "refugioSessions"
+      ) || "[]"
+    );
+
+
+  sessions.push({
+
+    date:new Date().toISOString(),
+
+    area:selectedArea,
+
+    before:beforeIntensity,
+
+    after:afterIntensity,
+
+    language:currentLanguage
+
+  });
+
+
+  localStorage.setItem(
+    "refugioSessions",
+    JSON.stringify(sessions)
+  );
+
+}
+
+
+/* =====================================================
+   PROMISES
+===================================================== */
+
+function renderPromises(){
+
+  const container =
+    document.getElementById("promiseList");
+
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  promises.forEach(item=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "promise";
+
+    div.innerHTML = `
+      <div>
+        ${escapeHtml(item[currentLanguage])}
+      </div>
+
+      <div class="promise-ref">
+        ${escapeHtml(item.ref)}
+      </div>
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+
+/* =====================================================
+   TRUTH FILTER
+===================================================== */
+
+function saveTruth(){
+
+  const prediction =
+    document.getElementById("prediction")
+    .value.trim();
+
+  const objective =
+    document.getElementById("objective")
+    .value.trim();
+
+  const alternative =
+    document.getElementById("alternative")
+    .value.trim();
+
+  const balanced =
+    document.getElementById("balanced")
+    .value.trim();
+
+  if(!prediction){
+
+    alert(
+      currentLanguage === "es"
+      ? "Escribe primero qué está prediciendo tu mente."
+      : "First write what your mind is predicting."
+    );
+
+    return;
+
+  }
+
+
+  const reflections =
+    JSON.parse(
+      localStorage.getItem(
+        "refugioTruthReflections"
+      ) || "[]"
+    );
+
+
+  reflections.push({
+
+    date:new Date().toISOString(),
+
+    area:selectedArea,
+
+    prediction,
+
+    objective,
+
+    alternative,
+
+    function:
+      document.getElementById("mindFunction").value,
+
+    balanced,
+
+    language:currentLanguage
+
+  });
+
+
+  localStorage.setItem(
+    "refugioTruthReflections",
+    JSON.stringify(reflections)
+  );
+
+
+  const saved =
+    document.getElementById("truthSaved");
+
+
+  saved.classList.remove("hidden");
+
+  saved.innerHTML =
+    currentLanguage === "es"
+    ? "✓ Reflexión guardada en este dispositivo."
+    : "✓ Reflection saved on this device.";
+
+}
+
+
+/* =====================================================
+   EVIDENCE
+===================================================== */
+
+function saveEvidence(){
+
+  const fact =
+    document.getElementById("fact")
+    .value.trim();
+
+  const interpretation =
+    document.getElementById("interpretation")
+    .value.trim();
+
+  const alternative =
+    document.getElementById("alternativeEvidence")
+    .value.trim();
+
+  if(!fact){
+
+    alert(
+      currentLanguage === "es"
+      ? "Escribe al menos un hecho observable."
+      : "Write at least one observable fact."
+    );
+
+    return;
+
+  }
+
+
+  const evidence =
+    JSON.parse(
+      localStorage.getItem(
+        "refugioEvidence"
+      ) || "[]"
+    );
+
+
+  evidence.push({
+
+    id:
+      Date.now(),
+
+    date:
+      new Date().toISOString(),
+
+    fact,
+
+    interpretation,
+
+    alternative
+
+  });
+
+
+  localStorage.setItem(
+    "refugioEvidence",
+    JSON.stringify(evidence)
+  );
+
+
+  document
+    .getElementById("fact")
+    .value = "";
+
+  document
+    .getElementById("interpretation")
+    .value = "";
+
+  document
+    .getElementById("alternativeEvidence")
+    .value = "";
+
+
+  renderEvidence();
+
+}
+
+
+function renderEvidence(){
+
+  const container =
+    document.getElementById("evidenceList");
+
+  if(!container) return;
+
+  const evidence =
+    JSON.parse(
+      localStorage.getItem(
+        "refugioEvidence"
+      ) || "[]"
+    );
+
+
+  if(!evidence.length){
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  evidence
+    .slice()
+    .reverse()
+    .forEach(item=>{
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "evidence-item";
+
+      div.innerHTML = `
+
+        <strong>
+          ${
+            currentLanguage === "es"
+            ? "Hecho"
+            : "Fact"
+          }
+        </strong>
+
+        <div>
+          ${escapeHtml(item.fact)}
+        </div>
+
+        <strong style="margin-top:10px;">
+          ${
+            currentLanguage === "es"
+            ? "Interpretación"
+            : "Interpretation"
+          }
+        </strong>
+
+        <div>
+          ${escapeHtml(item.interpretation || "—")}
+        </div>
+
+        <strong style="margin-top:10px;">
+          ${
+            currentLanguage === "es"
+            ? "Otra posibilidad"
+            : "Another possibility"
+          }
+        </strong>
+
+        <div>
+          ${escapeHtml(item.alternative || "—")}
+        </div>
+
+        <button
+          class="delete-small"
+          onclick="deleteEvidence(${item.id})">
+
+          ${
+            currentLanguage === "es"
+            ? "Eliminar"
+            : "Delete"
+          }
+
+        </button>
+
+      `;
+
+      container.appendChild(div);
+
+    });
+
+}
+
+
+function deleteEvidence(id){
+
+  const evidence =
+    JSON.parse(
+      localStorage.getItem(
+        "refugioEvidence"
+      ) || "[]"
+    );
+
+
+  const filtered =
+    evidence.filter(
+      item=>item.id !== id
+    );
+
+
+  localStorage.setItem(
+    "refugioEvidence",
+    JSON.stringify(filtered)
+  );
+
+
+  renderEvidence();
+
+}
+
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+function analyzeLoad(){
+
+  let count = 0;
+
+  if(
+    document.getElementById("loadSleep").checked
+  ) count++;
+
+  if(
+    document.getElementById("loadWater").checked
+  ) count++;
+
+  if(
+    document.getElementById("loadScreens").checked
+  ) count++;
+
+  if(
+    document.getElementById("loadFood").checked
+  ) count++;
+
+
+  let message = "";
+
+
+  if(currentLanguage === "es"){
+
+    if(count === 0){
+
+      message =
+        "No seleccionaste factores de carga. Puedes continuar observando cómo te sientes sin buscar necesariamente una explicación.";
+
+    }else if(count === 1){
+
+      message =
+        "Hay un factor básico que podrías atender si está dentro de tus posibilidades. A veces pequeñas acciones físicas ayudan a crear condiciones más favorables.";
+
+    }else if(count <= 3){
+
+      message =
+        "Hay varios factores de carga presentes. Antes de exigirle a tu mente que resuelva todo, considera atender una necesidad básica.";
+
+    }else{
+
+      message =
+        "Hay varios factores físicos y de ritmo diario que podrían estar aumentando tu carga. Considera comenzar por una necesidad básica y sencilla.";
+
+    }
+
+  }else{
+
+    if(count === 0){
+
+      message =
+        "You did not select any load factors. You can continue observing how you feel without necessarily looking for an explanation.";
+
+    }else if(count === 1){
+
+      message =
+        "There is one basic factor you might address if it is within your control. Sometimes small physical actions create more favorable conditions.";
+
+    }else if(count <= 3){
+
+      message =
+        "Several load factors are present. Before asking your mind to solve everything, consider addressing one basic need.";
+
+    }else{
+
+      message =
+        "Several physical and daily-rhythm factors may be adding to your load. Consider starting with one simple basic need.";
+
+    }
+
+  }
+
+
+  const result =
+    document.getElementById("loadResult");
+
+  result.textContent =
+    message;
+
+  result.classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    updateAccessLanguage();
+
+    document
+      .getElementById("testerCode")
+      .addEventListener(
+        "keydown",
+        event=>{
+
+          if(event.key === "Enter"){
+
+            checkTesterAccess();
+
+          }
+
+        }
+      );
+
+    checkExistingAccess();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
